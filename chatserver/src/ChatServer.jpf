@@ -1,0 +1,18 @@
+@using = jpf-nas
+classpath=.
+
+target.0=ChatServer
+target.1=ChatClient
+target.2=ChatClient
+target.args.0=2
+
+chatserver=.
+chatserver.classpath=.
+chatserver.sourcepath=.
+
+
+listener=gov.nasa.jpf.listener.PreciseRaceDetector
+cg.threads.break_arrays=true
+
+report.console.property_violation=result,error,trace,snapshot
+vm.reuse_tid=false
