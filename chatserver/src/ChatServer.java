@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
+import gov.nasa.jpf.vm.Verify;
 
 class Worker implements Runnable {
     Socket sock;
@@ -13,25 +14,34 @@ class Worker implements Runnable {
     ChatServer chatServer;
     int idx;
 
-    public Worker(Socket s, ChatServer cs) {
+    public Worker(Socket s, ChatServer cs) throws IOException{
         chatServer = cs;
         sock = s;
+        try{
+            if(Verify.getBoolean()) {
+                throw new IOException("Simulated exception");
+            }
+                out = new PrintWriter(sock.getOutputStream(), true);
+                in = new BufferedReader(new
+                        InputStreamReader(sock.getInputStream()));
+
+        }catch(IOException e){
+            throw new IOException("resource(s) cannot be initialized");
+        }
     }
 
     public void run() {
         System.out.println("Thread running: " + Thread.currentThread());
     	idx = chatServer.n;
     	chatServer.n++;
-        //idx++;
 	try {
-            out = new PrintWriter(sock.getOutputStream(), true);
+            //out
             assert(out != null);
     	    assert(chatServer.workers.get(idx) == null);
             System.err.println("Adding "+idx+" to workers");
     	    chatServer.workers.put(idx, this);
     	    System.out.println("Registered worker " + idx + ".");
-            in = new BufferedReader(new
-                                    InputStreamReader(sock.getInputStream()));
+            //in
             String s = null;
             while ((s = in.readLine()) != null) {
                 chatServer.sendAll("[" + idx + "]" + s);
@@ -51,22 +61,27 @@ class Worker implements Runnable {
 
 public class ChatServer {
     HashMap<Integer, Worker> workers = new HashMap<>();
-    //Worker workers[];
     int n = 0;
 
     public ChatServer(int maxServ) {
         int port = 4444;
-        //workers = new Worker[maxServ];
+        boolean init = true;
         Socket sock;
 	    ServerSocket servsock = null;
         try {
             servsock = new ServerSocket(port);
             while (maxServ-- != 0) {
-                System.err.println("in maxserv loop");
                 sock = servsock.accept();
-                System.err.println("After servsock accept");
-        		Worker worker = new Worker(sock, this);
-        		new Thread(worker).start();
+                Worker worker = null;
+                try{
+                    worker = new Worker(sock, this);
+                }catch(IOException e){
+                    init = false;
+                }
+                if(init){
+                    //assert(false);
+                    new Thread(worker).start();
+                }
             }
 	    //servsock.close();
         } catch(IOException ioe) {
@@ -84,14 +99,9 @@ public class ChatServer {
     }
 
     public synchronized void sendAll(String s) {
-        int i;
         for (Worker w: workers.values()) {
-            //System.err.println("Trying to send to: " + );
-            //System.err.println("Workers size: " + workers.length);
-	        //workers[i].send(s);
             w.send(s);
         }
-        
     }
 
     public synchronized void remove(int i) {
