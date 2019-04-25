@@ -1,0 +1,516 @@
+====================================================== system under test
+ChatServer.main("2")+ChatClient.main()+ChatClient.main()
+
+====================================================== search started: 4/25/19 4:29 PM
+Client 0 connected.
+Server shutting down.
+Thread running: Thread[Thread-1,5,main]
+Registered worker 0.
+0: Received [0]0: Hello, world!
+Client 0 connected.
+Worker thread 0: java.net.SocketException: Connection reset
+
+====================================================== error 1
+gov.nasa.jpf.vm.NoUncaughtExceptionsProperty
+java.lang.NullPointerException: Calling 'send(Ljava/lang/String;)V' on null object
+	at ChatServer.sendAll(ChatServer.java:83)
+	at ChatServer.remove(ChatServer.java:89)
+	at Worker.run(ChatServer.java:40)
+
+
+====================================================== trace #1
+------------------------------------------------------ transition #0 thread: 0
+gov.nasa.jpf.vm.choice.ThreadChoiceFromSet {id:"ROOT" ,1/3,isCascaded:false}
+      [3168 insn w/o sources]
+  ChatServer.java:73             : if (args.length == 0) {
+  ChatServer.java:76             : new ChatServer(Integer.parseInt(args[0]));
+      [2 insn w/o sources]
+  ChatServer.java:76             : new ChatServer(Integer.parseInt(args[0]));
+  ChatServer.java:53             : public ChatServer(int maxServ) {
+      [1 insn w/o sources]
+  ChatServer.java:51             : int n = 0;
+  ChatServer.java:54             : int port = 4444;
+  ChatServer.java:55             : workers = new Worker[maxServ];
+  ChatServer.java:57             : ServerSocket servsock = null;
+  ChatServer.java:59             : servsock = new ServerSocket(port);
+      [81 insn w/o sources]
+  ChatServer.java:59             : servsock = new ServerSocket(port);
+  ChatServer.java:60             : while (maxServ-- != 0) {
+  ChatServer.java:61             : sock = servsock.accept();
+      [141 insn w/o sources]
+------------------------------------------------------ transition #1 thread: 1
+nas.java.net.choice.NasThreadChoice {id:"BLOCKING_ACCEPT" ,1/2,isCascaded:false}
+      [3168 insn w/o sources]
+  ChatClient.java:13             : static int currID = 0;
+  ChatClient.java:1              : /* $Id: ChatClient.java 723 2009-09-24 07:48:58Z cartho $ */
+      [1 insn w/o sources]
+  ChatClient.java:16             : new ChatClient().exec();
+  ChatClient.java:19             : public ChatClient() {
+      [1 insn w/o sources]
+  ChatClient.java:20             : synchronized(getClass()) {
+      [2 insn w/o sources]
+  ChatClient.java:20             : synchronized(getClass()) {
+  ChatClient.java:21             : id = currID++;
+  ChatClient.java:22             : }
+  ChatClient.java:23             : }
+  ChatClient.java:16             : new ChatClient().exec();
+  ChatClient.java:27             : Socket socket = new Socket();
+      [10 insn w/o sources]
+  ChatClient.java:27             : Socket socket = new Socket();
+      [116 insn w/o sources]
+  ChatClient.java:27             : Socket socket = new Socket();
+  ChatClient.java:28             : InetSocketAddress addr = new InetSocketAddress("localhost", 4444);
+      [20 insn w/o sources]
+  ChatClient.java:28             : InetSocketAddress addr = new InetSocketAddress("localhost", 4444);
+  ChatClient.java:29             : socket.connect(addr);
+      [23 insn w/o sources]
+------------------------------------------------------ transition #2 thread: 0
+nas.java.net.choice.NasThreadChoice {id:"CONNECT" ,1/3,isCascaded:false}
+      [3 insn w/o sources]
+  ChatServer.java:61             : sock = servsock.accept();
+  ChatServer.java:62             : Worker worker = new Worker(sock, this);
+      [1 insn w/o sources]
+  ChatServer.java:8              : class Worker implements Runnable {
+      [2 insn w/o sources]
+  ChatServer.java:8              : class Worker implements Runnable {
+  ChatServer.java:1              : import java.io.BufferedReader;
+  ChatServer.java:62             : Worker worker = new Worker(sock, this);
+  ChatServer.java:15             : public Worker(Socket s, ChatServer cs) {
+      [1 insn w/o sources]
+  ChatServer.java:16             : chatServer = cs;
+  ChatServer.java:17             : sock = s;
+  ChatServer.java:18             : }
+  ChatServer.java:62             : Worker worker = new Worker(sock, this);
+  ChatServer.java:63             : new Thread(worker).start();
+      [145 insn w/o sources]
+  ChatServer.java:63             : new Thread(worker).start();
+      [1 insn w/o sources]
+------------------------------------------------------ transition #3 thread: 0
+gov.nasa.jpf.vm.choice.ThreadChoiceFromSet {id:"START" ,1/2,isCascaded:false}
+      [2 insn w/o sources]
+  ChatServer.java:64             : }
+  ChatServer.java:60             : while (maxServ-- != 0) {
+  ChatServer.java:61             : sock = servsock.accept();
+      [67 insn w/o sources]
+------------------------------------------------------ transition #4 thread: 0
+gov.nasa.jpf.vm.choice.ThreadChoiceFromSet {id:"LOCK" ,1/2,isCascaded:false}
+      [64 insn w/o sources]
+------------------------------------------------------ transition #5 thread: 1
+nas.java.net.choice.NasThreadChoice {id:"BLOCKING_ACCEPT" ,1/3,isCascaded:false}
+      [4 insn w/o sources]
+  ChatClient.java:30             : System.out.println("Client " + id + " connected.");
+      [2 insn w/o sources]
+  ChatClient.java:30             : System.out.println("Client " + id + " connected.");
+      [2 insn w/o sources]
+  ChatClient.java:30             : System.out.println("Client " + id + " connected.");
+      [2 insn w/o sources]
+  ChatClient.java:30             : System.out.println("Client " + id + " connected.");
+      [2 insn w/o sources]
+  ChatClient.java:30             : System.out.println("Client " + id + " connected.");
+      [2 insn w/o sources]
+  ChatClient.java:30             : System.out.println("Client " + id + " connected.");
+      [2 insn w/o sources]
+  ChatClient.java:31             : InputStreamReader istr =
+      [8 insn w/o sources]
+  ChatClient.java:31             : InputStreamReader istr =
+  ChatClient.java:32             : new InputStreamReader(socket.getInputStream());
+      [29 insn w/o sources]
+  ChatClient.java:32             : new InputStreamReader(socket.getInputStream());
+      [23 insn w/o sources]
+  ChatClient.java:32             : new InputStreamReader(socket.getInputStream());
+  ChatClient.java:33             : BufferedReader in = new BufferedReader(istr);
+      [7 insn w/o sources]
+  ChatClient.java:33             : BufferedReader in = new BufferedReader(istr);
+      [48 insn w/o sources]
+  ChatClient.java:33             : BufferedReader in = new BufferedReader(istr);
+  ChatClient.java:34             : OutputStreamWriter out =
+      [8 insn w/o sources]
+  ChatClient.java:34             : OutputStreamWriter out =
+  ChatClient.java:35             : new OutputStreamWriter(socket.getOutputStream());
+      [29 insn w/o sources]
+  ChatClient.java:35             : new OutputStreamWriter(socket.getOutputStream());
+      [17 insn w/o sources]
+  ChatClient.java:35             : new OutputStreamWriter(socket.getOutputStream());
+  ChatClient.java:36             : out.write(id + ": Hello, world!\n");
+      [2 insn w/o sources]
+  ChatClient.java:36             : out.write(id + ": Hello, world!\n");
+      [2 insn w/o sources]
+  ChatClient.java:36             : out.write(id + ": Hello, world!\n");
+      [2 insn w/o sources]
+  ChatClient.java:36             : out.write(id + ": Hello, world!\n");
+      [2 insn w/o sources]
+  ChatClient.java:36             : out.write(id + ": Hello, world!\n");
+      [55 insn w/o sources]
+  ChatClient.java:37             : out.flush();
+      [1 insn w/o sources]
+  ChatClient.java:38             : for (int i = 0; i < 1; i++) {
+  ChatClient.java:39             : System.out.println(id + ": Received " + in.readLine());
+      [2 insn w/o sources]
+  ChatClient.java:39             : System.out.println(id + ": Received " + in.readLine());
+      [2 insn w/o sources]
+  ChatClient.java:39             : System.out.println(id + ": Received " + in.readLine());
+      [2 insn w/o sources]
+  ChatClient.java:39             : System.out.println(id + ": Received " + in.readLine());
+      [77 insn w/o sources]
+------------------------------------------------------ transition #6 thread: 2
+nas.java.net.choice.NasThreadChoice {id:"BLOCKING_READ" ,1/2,isCascaded:false}
+      [3168 insn w/o sources]
+  ChatClient.java:13             : static int currID = 0;
+  ChatClient.java:1              : /* $Id: ChatClient.java 723 2009-09-24 07:48:58Z cartho $ */
+      [1 insn w/o sources]
+  ChatClient.java:16             : new ChatClient().exec();
+  ChatClient.java:19             : public ChatClient() {
+      [1 insn w/o sources]
+  ChatClient.java:20             : synchronized(getClass()) {
+      [2 insn w/o sources]
+  ChatClient.java:20             : synchronized(getClass()) {
+  ChatClient.java:21             : id = currID++;
+  ChatClient.java:22             : }
+  ChatClient.java:23             : }
+  ChatClient.java:16             : new ChatClient().exec();
+  ChatClient.java:27             : Socket socket = new Socket();
+      [10 insn w/o sources]
+  ChatClient.java:27             : Socket socket = new Socket();
+      [116 insn w/o sources]
+  ChatClient.java:27             : Socket socket = new Socket();
+  ChatClient.java:28             : InetSocketAddress addr = new InetSocketAddress("localhost", 4444);
+      [20 insn w/o sources]
+  ChatClient.java:28             : InetSocketAddress addr = new InetSocketAddress("localhost", 4444);
+  ChatClient.java:29             : socket.connect(addr);
+      [23 insn w/o sources]
+------------------------------------------------------ transition #7 thread: 0
+nas.java.net.choice.NasThreadChoice {id:"CONNECT" ,1/3,isCascaded:false}
+      [3 insn w/o sources]
+  ChatServer.java:61             : sock = servsock.accept();
+  ChatServer.java:62             : Worker worker = new Worker(sock, this);
+  ChatServer.java:15             : public Worker(Socket s, ChatServer cs) {
+      [1 insn w/o sources]
+  ChatServer.java:16             : chatServer = cs;
+  ChatServer.java:17             : sock = s;
+  ChatServer.java:18             : }
+  ChatServer.java:62             : Worker worker = new Worker(sock, this);
+  ChatServer.java:63             : new Thread(worker).start();
+      [27 insn w/o sources]
+------------------------------------------------------ transition #8 thread: 0
+gov.nasa.jpf.vm.choice.ThreadChoiceFromSet {id:"LOCK" ,1/2,isCascaded:false}
+      [119 insn w/o sources]
+  ChatServer.java:63             : new Thread(worker).start();
+      [1 insn w/o sources]
+------------------------------------------------------ transition #9 thread: 0
+gov.nasa.jpf.vm.choice.ThreadChoiceFromSet {id:"START" ,1/3,isCascaded:false}
+      [2 insn w/o sources]
+  ChatServer.java:64             : }
+  ChatServer.java:60             : while (maxServ-- != 0) {
+  ChatServer.java:65             : servsock.close();
+------------------------------------------------------ transition #10 thread: 0
+gov.nasa.jpf.vm.choice.ThreadChoiceFromSet {id:"LOCK" ,1/3,isCascaded:false}
+  ChatServer.java:65             : servsock.close();
+      [2 insn w/o sources]
+  ChatServer.java:68             : }
+  ChatServer.java:69             : System.out.println("Server shutting down.");
+      [2 insn w/o sources]
+  ChatServer.java:70             : }
+  ChatServer.java:76             : new ChatServer(Integer.parseInt(args[0]));
+  ChatServer.java:78             : }
+  ChatServer.java:3              : import java.io.InputStreamReader;
+------------------------------------------------------ transition #11 thread: 3
+gov.nasa.jpf.vm.choice.BreakGenerator {id:"finalize" ,1/1,isCascaded:false}
+      [27 insn w/o sources]
+------------------------------------------------------ transition #12 thread: 3
+gov.nasa.jpf.vm.choice.ThreadChoiceFromSet {id:"LOCK" ,1/3,isCascaded:false}
+      [22 insn w/o sources]
+------------------------------------------------------ transition #13 thread: 6
+gov.nasa.jpf.vm.choice.ThreadChoiceFromSet {id:"POST_FINALIZE" ,1/2,isCascaded:false}
+      [1 insn w/o sources]
+  ChatServer.java:1              : import java.io.BufferedReader;
+  ChatServer.java:21             : System.out.println("Thread running: " + Thread.currentThread());
+      [2 insn w/o sources]
+  ChatServer.java:21             : System.out.println("Thread running: " + Thread.currentThread());
+      [2 insn w/o sources]
+  ChatServer.java:21             : System.out.println("Thread running: " + Thread.currentThread());
+      [2 insn w/o sources]
+  ChatServer.java:21             : System.out.println("Thread running: " + Thread.currentThread());
+      [59 insn w/o sources]
+  ChatServer.java:21             : System.out.println("Thread running: " + Thread.currentThread());
+      [2 insn w/o sources]
+  ChatServer.java:21             : System.out.println("Thread running: " + Thread.currentThread());
+      [2 insn w/o sources]
+  ChatServer.java:22             : idx = chatServer.n;
+  ChatServer.java:23             : chatServer.n++;
+  ChatServer.java:25             : out = new PrintWriter(sock.getOutputStream(), true);
+      [29 insn w/o sources]
+  ChatServer.java:25             : out = new PrintWriter(sock.getOutputStream(), true);
+      [3 insn w/o sources]
+------------------------------------------------------ transition #14 thread: 6
+gov.nasa.jpf.vm.choice.ThreadChoiceFromSet {id:"LOCK" ,1/2,isCascaded:false}
+      [9 insn w/o sources]
+------------------------------------------------------ transition #15 thread: 6
+gov.nasa.jpf.vm.choice.ThreadChoiceFromSet {id:"LOCK" ,1/2,isCascaded:false}
+      [6 insn w/o sources]
+------------------------------------------------------ transition #16 thread: 6
+gov.nasa.jpf.vm.choice.ThreadChoiceFromSet {id:"EXPOSE" ,1/2,isCascaded:false}
+      [82 insn w/o sources]
+------------------------------------------------------ transition #17 thread: 6
+gov.nasa.jpf.vm.choice.ThreadChoiceFromSet {id:"LOCK" ,1/2,isCascaded:false}
+      [112 insn w/o sources]
+------------------------------------------------------ transition #18 thread: 6
+gov.nasa.jpf.vm.choice.ThreadChoiceFromSet {id:"LOCK" ,1/2,isCascaded:false}
+      [63 insn w/o sources]
+  ChatServer.java:25             : out = new PrintWriter(sock.getOutputStream(), true);
+  ChatServer.java:26             : assert(out != null);
+  ChatServer.java:27             : assert(chatServer.workers[idx] == null);
+  ChatServer.java:28             : chatServer.workers[idx] = this;
+  ChatServer.java:29             : System.out.println("Registered worker " + idx + ".");
+      [2 insn w/o sources]
+  ChatServer.java:29             : System.out.println("Registered worker " + idx + ".");
+      [2 insn w/o sources]
+  ChatServer.java:29             : System.out.println("Registered worker " + idx + ".");
+      [2 insn w/o sources]
+  ChatServer.java:29             : System.out.println("Registered worker " + idx + ".");
+      [2 insn w/o sources]
+  ChatServer.java:29             : System.out.println("Registered worker " + idx + ".");
+      [2 insn w/o sources]
+  ChatServer.java:29             : System.out.println("Registered worker " + idx + ".");
+      [2 insn w/o sources]
+  ChatServer.java:30             : in = new BufferedReader(new
+      [1 insn w/o sources]
+------------------------------------------------------ transition #19 thread: 6
+gov.nasa.jpf.vm.choice.ThreadChoiceFromSet {id:"LOCK" ,1/2,isCascaded:false}
+      [7 insn w/o sources]
+  ChatServer.java:30             : in = new BufferedReader(new
+      [1 insn w/o sources]
+------------------------------------------------------ transition #20 thread: 6
+gov.nasa.jpf.vm.choice.ThreadChoiceFromSet {id:"LOCK" ,1/2,isCascaded:false}
+      [6 insn w/o sources]
+------------------------------------------------------ transition #21 thread: 6
+gov.nasa.jpf.vm.choice.ThreadChoiceFromSet {id:"EXPOSE" ,1/2,isCascaded:false}
+      [3 insn w/o sources]
+  ChatServer.java:30             : in = new BufferedReader(new
+  ChatServer.java:31             : InputStreamReader(sock.getInputStream()));
+      [29 insn w/o sources]
+  ChatServer.java:31             : InputStreamReader(sock.getInputStream()));
+      [23 insn w/o sources]
+  ChatServer.java:31             : InputStreamReader(sock.getInputStream()));
+      [48 insn w/o sources]
+  ChatServer.java:31             : InputStreamReader(sock.getInputStream()));
+  ChatServer.java:32             : String s = null;
+  ChatServer.java:33             : while ((s = in.readLine()) != null) {
+      [10 insn w/o sources]
+------------------------------------------------------ transition #22 thread: 6
+gov.nasa.jpf.vm.choice.ThreadChoiceFromSet {id:"LOCK" ,1/2,isCascaded:false}
+      [47 insn w/o sources]
+------------------------------------------------------ transition #23 thread: 6
+gov.nasa.jpf.vm.choice.ThreadChoiceFromSet {id:"LOCK" ,1/2,isCascaded:false}
+      [435 insn w/o sources]
+  ChatServer.java:33             : while ((s = in.readLine()) != null) {
+  ChatServer.java:34             : chatServer.sendAll("[" + idx + "]" + s);
+      [2 insn w/o sources]
+  ChatServer.java:34             : chatServer.sendAll("[" + idx + "]" + s);
+      [2 insn w/o sources]
+  ChatServer.java:34             : chatServer.sendAll("[" + idx + "]" + s);
+      [2 insn w/o sources]
+  ChatServer.java:34             : chatServer.sendAll("[" + idx + "]" + s);
+      [2 insn w/o sources]
+  ChatServer.java:34             : chatServer.sendAll("[" + idx + "]" + s);
+      [2 insn w/o sources]
+  ChatServer.java:34             : chatServer.sendAll("[" + idx + "]" + s);
+      [2 insn w/o sources]
+  ChatServer.java:34             : chatServer.sendAll("[" + idx + "]" + s);
+------------------------------------------------------ transition #24 thread: 6
+gov.nasa.jpf.vm.choice.ThreadChoiceFromSet {id:"LOCK" ,1/2,isCascaded:false}
+  ChatServer.java:34             : chatServer.sendAll("[" + idx + "]" + s);
+  ChatServer.java:82             : for (i = 0; i < n; i++) {
+  ChatServer.java:83             : workers[i].send(s);
+  ChatServer.java:45             : out.println(s);
+      [5 insn w/o sources]
+------------------------------------------------------ transition #25 thread: 6
+gov.nasa.jpf.vm.choice.ThreadChoiceFromSet {id:"LOCK" ,1/2,isCascaded:false}
+      [41 insn w/o sources]
+------------------------------------------------------ transition #26 thread: 6
+gov.nasa.jpf.vm.choice.ThreadChoiceFromSet {id:"LOCK" ,1/2,isCascaded:false}
+      [109 insn w/o sources]
+------------------------------------------------------ transition #27 thread: 6
+gov.nasa.jpf.vm.choice.ThreadChoiceFromSet {id:"LOCK" ,1/2,isCascaded:false}
+      [79 insn w/o sources]
+------------------------------------------------------ transition #28 thread: 6
+gov.nasa.jpf.vm.choice.ThreadChoiceFromSet {id:"LOCK" ,1/2,isCascaded:false}
+      [31 insn w/o sources]
+------------------------------------------------------ transition #29 thread: 6
+gov.nasa.jpf.vm.choice.ThreadChoiceFromSet {id:"LOCK" ,1/2,isCascaded:false}
+      [26 insn w/o sources]
+------------------------------------------------------ transition #30 thread: 1
+nas.java.net.choice.NasThreadChoice {id:"WRITE" ,1/4,isCascaded:false}
+      [465 insn w/o sources]
+  ChatClient.java:39             : System.out.println(id + ": Received " + in.readLine());
+      [2 insn w/o sources]
+  ChatClient.java:39             : System.out.println(id + ": Received " + in.readLine());
+      [2 insn w/o sources]
+  ChatClient.java:39             : System.out.println(id + ": Received " + in.readLine());
+      [2 insn w/o sources]
+  ChatClient.java:38             : for (int i = 0; i < 1; i++) {
+  ChatClient.java:41             : out.close();
+      [13 insn w/o sources]
+------------------------------------------------------ transition #31 thread: 1
+nas.java.net.choice.NasThreadChoice {id:"SOCKET_CLOSE" ,1/4,isCascaded:false}
+      [4 insn w/o sources]
+  ChatClient.java:44             : }
+  ChatClient.java:45             : }
+  ChatClient.java:3              : import java.io.BufferedReader;
+------------------------------------------------------ transition #32 thread: 4
+gov.nasa.jpf.vm.choice.BreakGenerator {id:"finalize" ,1/1,isCascaded:false}
+      [56 insn w/o sources]
+------------------------------------------------------ transition #33 thread: 2
+gov.nasa.jpf.vm.choice.ThreadChoiceFromSet {id:"TERMINATE" ,1/3,isCascaded:false,attrs:[gov.nasa.jpf.vm.GlobalSchedulingPoint@15bfd87]}
+      [4 insn w/o sources]
+  ChatClient.java:30             : System.out.println("Client " + id + " connected.");
+      [2 insn w/o sources]
+  ChatClient.java:30             : System.out.println("Client " + id + " connected.");
+      [2 insn w/o sources]
+  ChatClient.java:30             : System.out.println("Client " + id + " connected.");
+      [2 insn w/o sources]
+  ChatClient.java:30             : System.out.println("Client " + id + " connected.");
+      [2 insn w/o sources]
+  ChatClient.java:30             : System.out.println("Client " + id + " connected.");
+      [2 insn w/o sources]
+  ChatClient.java:30             : System.out.println("Client " + id + " connected.");
+      [2 insn w/o sources]
+  ChatClient.java:31             : InputStreamReader istr =
+      [8 insn w/o sources]
+  ChatClient.java:31             : InputStreamReader istr =
+  ChatClient.java:32             : new InputStreamReader(socket.getInputStream());
+      [29 insn w/o sources]
+  ChatClient.java:32             : new InputStreamReader(socket.getInputStream());
+      [23 insn w/o sources]
+  ChatClient.java:32             : new InputStreamReader(socket.getInputStream());
+  ChatClient.java:33             : BufferedReader in = new BufferedReader(istr);
+      [7 insn w/o sources]
+  ChatClient.java:33             : BufferedReader in = new BufferedReader(istr);
+      [48 insn w/o sources]
+  ChatClient.java:33             : BufferedReader in = new BufferedReader(istr);
+  ChatClient.java:34             : OutputStreamWriter out =
+      [8 insn w/o sources]
+  ChatClient.java:34             : OutputStreamWriter out =
+  ChatClient.java:35             : new OutputStreamWriter(socket.getOutputStream());
+      [29 insn w/o sources]
+  ChatClient.java:35             : new OutputStreamWriter(socket.getOutputStream());
+      [17 insn w/o sources]
+  ChatClient.java:35             : new OutputStreamWriter(socket.getOutputStream());
+  ChatClient.java:36             : out.write(id + ": Hello, world!\n");
+      [2 insn w/o sources]
+  ChatClient.java:36             : out.write(id + ": Hello, world!\n");
+      [2 insn w/o sources]
+  ChatClient.java:36             : out.write(id + ": Hello, world!\n");
+      [2 insn w/o sources]
+  ChatClient.java:36             : out.write(id + ": Hello, world!\n");
+      [2 insn w/o sources]
+  ChatClient.java:36             : out.write(id + ": Hello, world!\n");
+      [55 insn w/o sources]
+  ChatClient.java:37             : out.flush();
+      [1 insn w/o sources]
+  ChatClient.java:38             : for (int i = 0; i < 1; i++) {
+  ChatClient.java:39             : System.out.println(id + ": Received " + in.readLine());
+      [2 insn w/o sources]
+  ChatClient.java:39             : System.out.println(id + ": Received " + in.readLine());
+      [2 insn w/o sources]
+  ChatClient.java:39             : System.out.println(id + ": Received " + in.readLine());
+      [2 insn w/o sources]
+  ChatClient.java:39             : System.out.println(id + ": Received " + in.readLine());
+      [77 insn w/o sources]
+------------------------------------------------------ transition #34 thread: 6
+nas.java.net.choice.NasThreadChoice {id:"BLOCKING_READ" ,1/2,isCascaded:false}
+      [39 insn w/o sources]
+  ChatServer.java:46             : }
+  ChatServer.java:82             : for (i = 0; i < n; i++) {
+  ChatServer.java:85             : }
+  ChatServer.java:34             : chatServer.sendAll("[" + idx + "]" + s);
+  ChatServer.java:33             : while ((s = in.readLine()) != null) {
+      [10 insn w/o sources]
+------------------------------------------------------ transition #35 thread: 6
+gov.nasa.jpf.vm.choice.ThreadChoiceFromSet {id:"LOCK" ,1/2,isCascaded:false}
+      [47 insn w/o sources]
+------------------------------------------------------ transition #36 thread: 6
+gov.nasa.jpf.vm.choice.ThreadChoiceFromSet {id:"LOCK" ,1/2,isCascaded:false}
+      [32 insn w/o sources]
+  ChatServer.java:37             : } catch(IOException ioe) {
+  ChatServer.java:38             : System.out.println("Worker thread " + idx + ": " + ioe);
+      [2 insn w/o sources]
+  ChatServer.java:38             : System.out.println("Worker thread " + idx + ": " + ioe);
+      [2 insn w/o sources]
+  ChatServer.java:38             : System.out.println("Worker thread " + idx + ": " + ioe);
+      [2 insn w/o sources]
+  ChatServer.java:38             : System.out.println("Worker thread " + idx + ": " + ioe);
+      [2 insn w/o sources]
+  ChatServer.java:38             : System.out.println("Worker thread " + idx + ": " + ioe);
+      [14 insn w/o sources]
+  ChatServer.java:38             : System.out.println("Worker thread " + idx + ": " + ioe);
+      [2 insn w/o sources]
+  ChatServer.java:38             : System.out.println("Worker thread " + idx + ": " + ioe);
+      [2 insn w/o sources]
+  ChatServer.java:40             : chatServer.remove(idx);
+------------------------------------------------------ transition #37 thread: 6
+gov.nasa.jpf.vm.choice.ThreadChoiceFromSet {id:"LOCK" ,1/2,isCascaded:false}
+  ChatServer.java:40             : chatServer.remove(idx);
+  ChatServer.java:88             : workers[i] = null;
+  ChatServer.java:89             : sendAll("Client " + i + " quit.");
+      [2 insn w/o sources]
+  ChatServer.java:89             : sendAll("Client " + i + " quit.");
+      [2 insn w/o sources]
+  ChatServer.java:89             : sendAll("Client " + i + " quit.");
+      [2 insn w/o sources]
+  ChatServer.java:89             : sendAll("Client " + i + " quit.");
+      [2 insn w/o sources]
+  ChatServer.java:89             : sendAll("Client " + i + " quit.");
+      [2 insn w/o sources]
+  ChatServer.java:89             : sendAll("Client " + i + " quit.");
+  ChatServer.java:82             : for (i = 0; i < n; i++) {
+  ChatServer.java:83             : workers[i].send(s);
+
+====================================================== snapshot #1
+thread gov.nasa.jpf.FinalizerThread:{id:3,name:finalizer,status:WAITING,priority:5,isDaemon:false,lockCount:0,suspendCount:0}
+  waiting on: java.lang.Object@c7
+  call stack:
+	at gov.nasa.jpf.FinalizerThread.manageState(FinalizerThread.java)
+	at gov.nasa.jpf.FinalizerThread.processFinalizers(FinalizerThread.java:62)
+	at gov.nasa.jpf.FinalizerThread.run(FinalizerThread.java:68)
+
+thread java.lang.Thread:{id:2,name:main,status:WAITING,priority:5,isDaemon:false,lockCount:0,suspendCount:0}
+  owned locks:java.io.InputStreamReader@55f,java.lang.Object@55e
+  waiting on: java.lang.Object@4c8
+  call stack:
+	at java.net.SocketInputStream.read(SocketInputStream.java)
+	at java.io.InputStreamReader.read(InputStreamReader.java:93)
+	at java.io.BufferedReader.fill(BufferedReader.java:161)
+	at java.io.BufferedReader.readLine(BufferedReader.java:324)
+	at java.io.BufferedReader.readLine(BufferedReader.java:389)
+	at ChatClient.exec(ChatClient.java:39)
+	at ChatClient.main(ChatClient.java:16)
+
+thread gov.nasa.jpf.FinalizerThread:{id:5,name:finalizer,status:WAITING,priority:5,isDaemon:false,lockCount:0,suspendCount:0}
+  waiting on: java.lang.Object@251
+  call stack:
+
+thread java.lang.Thread:{id:6,name:Thread-1,status:RUNNING,priority:5,isDaemon:false,lockCount:0,suspendCount:0}
+  owned locks:ChatServer@2f5
+  call stack:
+	at ChatServer.sendAll(ChatServer.java:83)
+	at ChatServer.remove(ChatServer.java:89)
+	at Worker.run(ChatServer.java:40)
+
+thread java.lang.Thread:{id:7,name:Thread-2,status:RUNNING,priority:5,isDaemon:false,lockCount:0,suspendCount:0}
+  call stack:
+
+
+====================================================== results
+error #1: gov.nasa.jpf.vm.NoUncaughtExceptionsProperty "java.lang.NullPointerException: Calling 'send(Ljav..."
+
+====================================================== statistics
+elapsed time:       00:00:00
+states:             new=38,visited=0,backtracked=0,end=0
+search:             maxDepth=38,constraints=0
+choice generators:  thread=38 (signal=0,lock=22,sharedRef=2,threadApi=2,reschedule=3), data=0
+heap:               new=1447,released=121,maxLive=1292,gcCycles=37
+instructions:       13742
+max memory:         88MB
+loaded code:        classes=89,methods=4715
+
+====================================================== search finished: 4/25/19 4:29 PM

@@ -4,6 +4,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
 
 class Worker implements Runnable {
     Socket sock;
@@ -19,14 +20,16 @@ class Worker implements Runnable {
 
     public void run() {
         System.out.println("Thread running: " + Thread.currentThread());
-	idx = chatServer.n;
-	chatServer.n++;
+    	idx = chatServer.n;
+    	chatServer.n++;
+        //idx++;
 	try {
             out = new PrintWriter(sock.getOutputStream(), true);
             assert(out != null);
-	    assert(chatServer.workers[idx] == null);
-	    chatServer.workers[idx] = this;
-	    System.out.println("Registered worker " + idx + ".");
+    	    assert(chatServer.workers.get(idx) == null);
+            System.err.println("Adding "+idx+" to workers");
+    	    chatServer.workers.put(idx, this);
+    	    System.out.println("Registered worker " + idx + ".");
             in = new BufferedReader(new
                                     InputStreamReader(sock.getInputStream()));
             String s = null;
@@ -47,22 +50,25 @@ class Worker implements Runnable {
 }
 
 public class ChatServer {
-    Worker workers[];
+    HashMap<Integer, Worker> workers = new HashMap<>();
+    //Worker workers[];
     int n = 0;
 
     public ChatServer(int maxServ) {
         int port = 4444;
-        workers = new Worker[maxServ];
+        //workers = new Worker[maxServ];
         Socket sock;
-	ServerSocket servsock = null;
+	    ServerSocket servsock = null;
         try {
             servsock = new ServerSocket(port);
             while (maxServ-- != 0) {
+                System.err.println("in maxserv loop");
                 sock = servsock.accept();
-		Worker worker = new Worker(sock, this);
-		new Thread(worker).start();
+                System.err.println("After servsock accept");
+        		Worker worker = new Worker(sock, this);
+        		new Thread(worker).start();
             }
-	    servsock.close();
+	    //servsock.close();
         } catch(IOException ioe) {
             System.err.println("Server: " + ioe);
         }
@@ -79,13 +85,18 @@ public class ChatServer {
 
     public synchronized void sendAll(String s) {
         int i;
-        for (i = 0; i < n; i++) {
-	    workers[i].send(s);
+        for (Worker w: workers.values()) {
+            //System.err.println("Trying to send to: " + );
+            //System.err.println("Workers size: " + workers.length);
+	        //workers[i].send(s);
+            w.send(s);
         }
+        
     }
 
     public synchronized void remove(int i) {
-	workers[i] = null;
+	    //workers[i] = null;
+        workers.remove(i);
         sendAll("Client " + i + " quit.");
     }
 }
