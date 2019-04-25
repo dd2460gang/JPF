@@ -13,6 +13,9 @@ public class ServerSocket {
   }
 
   public Socket accept() throws IOException {
+      if (Verify.getBoolean()) { // possible failure
+        throw new java.net.ConnectException("Connection refused");
+      }
     return new Socket();
   }
 
