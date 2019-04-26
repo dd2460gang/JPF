@@ -36,7 +36,7 @@ public class DaytimeServer {
         connection.close();
 	server.close();
       }
-      catch(Exception e) {
+      catch(Exception e) { //Patch
         System.err.println(e);
       }
       System.out.println("Connection closed.");
