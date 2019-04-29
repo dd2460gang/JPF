@@ -6,11 +6,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-import com.sun.corba.se.spi.orbutil.threadpool.WorkQueue;
 import env.java.util.concurrent.RejectedExecutionHandler;
 import env.java.util.concurrent.ThreadPoolExecutor;
 //import gov.nasa.jpf.vm.Verify;
@@ -74,13 +72,14 @@ public class ChatServer {
         Socket sock;
 	    ServerSocket servsock = null;
         //ThreadPoolExecutor executor = (env.java.util.concurrent.ThreadPoolExecutor) Executors.newFixedThreadPool(10);
-        BlockingQueue wQueue = new LinkedBlockingQueue();
+        BlockingQueue<Runnable> wQueue = new LinkedBlockingQueue();
         RejectedExecutionHandler rH = new RejectedExecutionHandler(){
             @Override
             public void rejectedExecution(Runnable r, ThreadPoolExecutor executor){
+                System.out.println("No more threads");
             }
         };
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 10, 10, TimeUnit.SECONDS, wQueue, rH);
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 2, 10, TimeUnit.SECONDS, wQueue, rH);
 
         try {
             servsock = new ServerSocket(port);
