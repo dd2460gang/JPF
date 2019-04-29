@@ -5,10 +5,16 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
-import java.util.concurrent.ThreadPoolExecutor;
+import com.sun.corba.se.spi.orbutil.threadpool.WorkQueue;
+import env.java.util.concurrent.RejectedExecutionHandler;
+import env.java.util.concurrent.ThreadPoolExecutor;
 //import gov.nasa.jpf.vm.Verify;
+
 
 class Worker implements Runnable {
     Socket sock;
@@ -67,7 +73,14 @@ public class ChatServer {
         boolean init = true;
         Socket sock;
 	    ServerSocket servsock = null;
-        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
+        //ThreadPoolExecutor executor = (env.java.util.concurrent.ThreadPoolExecutor) Executors.newFixedThreadPool(10);
+        BlockingQueue wQueue = new LinkedBlockingQueue();
+        RejectedExecutionHandler rH = new RejectedExecutionHandler(){
+            @Override
+            public void rejectedExecution(Runnable r, ThreadPoolExecutor executor){
+            }
+        };
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 10, 10, TimeUnit.SECONDS, wQueue, rH);
 
         try {
             servsock = new ServerSocket(port);
@@ -124,7 +137,8 @@ public class ChatServer {
     }
 
     public synchronized int getAndUpdateN(){
-	n++;
-	return n-1;
+        n++;
+        return n-1;
     }
+
 }
