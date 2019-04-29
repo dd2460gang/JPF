@@ -5,7 +5,10 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
-import gov.nasa.jpf.vm.Verify;
+import java.util.concurrent.Executors;
+
+import java.util.concurrent.ThreadPoolExecutor;
+//import gov.nasa.jpf.vm.Verify;
 
 class Worker implements Runnable {
     Socket sock;
@@ -64,6 +67,8 @@ public class ChatServer {
         boolean init = true;
         Socket sock;
 	    ServerSocket servsock = null;
+        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
+
         try {
             servsock = new ServerSocket(port);
             while (maxServ-- != 0) {
@@ -81,7 +86,7 @@ public class ChatServer {
                 if(init){
                     assert(init);
                     //assert(false);
-                    new Thread(worker).start();
+                    executor.execute(new Thread(worker));
                 }
             }
 	    servsock.close();
@@ -89,11 +94,12 @@ public class ChatServer {
             System.err.println("Server: " + ioe);
         }
         System.out.println("Server shutting down.");
+        executor.shutdown();
     }
 
     public static void main(String args[]) throws IOException {
 	if (args.length == 0) {
-            new ChatServer(-1);
+        new ChatServer(-1);
 	} else {
 	    new ChatServer(Integer.parseInt(args[0]));
         }
