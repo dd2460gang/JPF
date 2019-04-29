@@ -18,15 +18,12 @@ class Worker implements Runnable {
         chatServer = cs;
         sock = s;
         try{
-            if(Verify.getBoolean()) {
-                throw new IOException("Simulated exception");
-            }
                 out = new PrintWriter(sock.getOutputStream(), true);
                 in = new BufferedReader(new
                         InputStreamReader(sock.getInputStream()));
 
         }catch(IOException e){
-            throw new IOException("resource(s) cannot be initialized");
+            //throw new IOException("resource(s) cannot be initialized");
         }
     }
 
@@ -37,9 +34,9 @@ class Worker implements Runnable {
 	try {
             //out
             assert(out != null);
-    	    assert(chatServer.workers.get(idx) == null);
+    	    assert(chatServer.getWorker(idx) == null);
             System.err.println("Adding "+idx+" to workers");
-    	    chatServer.workers.put(idx, this);
+            chatServer.putWorker(idx, this);
     	    System.out.println("Registered worker " + idx + ".");
             //in
             String s = null;
@@ -60,7 +57,8 @@ class Worker implements Runnable {
 }
 
 public class ChatServer {
-    HashMap<Integer, Worker> workers = new HashMap<>();
+    static HashMap<Integer, Worker> workers = new HashMap<>();
+
     int n = 0;
 
     public ChatServer(int maxServ) {
@@ -74,8 +72,11 @@ public class ChatServer {
                 sock = servsock.accept();
                 Worker worker = null;
                 try{
+                   // if(Verify.getBoolean()) { throw new IOException("Simulated exception"); }
                     worker = new Worker(sock, this);
+                    //new Thread(worker).start();
                 }catch(IOException e){
+                    //assert(false);
                     init = false;
                 }
                 if(init){
@@ -83,7 +84,7 @@ public class ChatServer {
                     new Thread(worker).start();
                 }
             }
-	    //servsock.close();
+	    servsock.close();
         } catch(IOException ioe) {
             System.err.println("Server: " + ioe);
         }
@@ -108,5 +109,11 @@ public class ChatServer {
 	    //workers[i] = null;
         workers.remove(i);
         sendAll("Client " + i + " quit.");
+    }
+    public static synchronized void putWorker(int idx, Worker w){
+        workers.put(idx, w);
+    }
+    public static synchronized Worker getWorker(int id){
+        return workers.get(id);
     }
 }
