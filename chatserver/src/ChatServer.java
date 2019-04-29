@@ -29,8 +29,7 @@ class Worker implements Runnable {
 
     public void run() {
         System.out.println("Thread running: " + Thread.currentThread());
-    	idx = chatServer.n;
-    	chatServer.n++;
+    	idx = chatServer.getAndUpdateN();
 	try {
             //out
             assert(out != null);
@@ -110,10 +109,15 @@ public class ChatServer {
         workers.remove(i);
         sendAll("Client " + i + " quit.");
     }
-    public static synchronized void putWorker(int idx, Worker w){
+    public synchronized void putWorker(int idx, Worker w){
         workers.put(idx, w);
     }
-    public static synchronized Worker getWorker(int id){
+    public  synchronized Worker getWorker(int id){
         return workers.get(id);
+    }
+
+    public synchronized int getAndUpdateN(){
+	n++;
+	return n-1;
     }
 }
