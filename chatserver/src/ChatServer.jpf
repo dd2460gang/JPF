@@ -16,3 +16,6 @@ cg.threads.break_arrays=true
 
 report.console.property_violation=result,error,trace,snapshot
 vm.reuse_tid=false
+
+vm.nas.initiating_target = 0
+vm.process_finalizers = false

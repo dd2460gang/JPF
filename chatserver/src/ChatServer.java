@@ -107,7 +107,7 @@ public class ChatServer {
             System.err.println("Server: " + ioe);
         }
         System.out.println("Server shutting down.");
-        //executor.shutdown();
+        executor.shutdown();
     }
 
     public static void main(String args[]) throws IOException {
