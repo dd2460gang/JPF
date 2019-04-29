@@ -75,11 +75,12 @@ public class ChatServer {
         BlockingQueue<Runnable> wQueue = new LinkedBlockingQueue();
         RejectedExecutionHandler rH = new RejectedExecutionHandler(){
             @Override
-            public void rejectedExecution(Runnable r, ThreadPoolExecutor executor){
+            public synchronized void rejectedExecution(Runnable r, ThreadPoolExecutor executor){
+                //assert(false);
                 System.out.println("No more threads");
             }
         };
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 2, 10, TimeUnit.SECONDS, wQueue, rH);
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 1, 10, TimeUnit.SECONDS, wQueue, rH);
 
         try {
             servsock = new ServerSocket(port);
@@ -106,7 +107,7 @@ public class ChatServer {
             System.err.println("Server: " + ioe);
         }
         System.out.println("Server shutting down.");
-        executor.shutdown();
+        //executor.shutdown();
     }
 
     public static void main(String args[]) throws IOException {

@@ -30,7 +30,10 @@ public class ThreadPoolExecutor {
         if (maximumPoolSize <=0) throw  new IllegalArgumentException();
         /*if (workQueue == null || threadFactory == null || handler == null)
             throw new NullPointerException();*/
-        if(handler == null) throw new NullPointerException();
+        if(handler == null){
+            System.out.println("Handler in constructor");
+            throw new NullPointerException("handler");}
+
         this.maximumPoolSize = maximumPoolSize;
         this.handler = handler;
         //this.corePoolSize = corePoolSize;
@@ -50,6 +53,9 @@ public class ThreadPoolExecutor {
             r.run();
             launchedThreads++;
         }else{
+            System.out.println("runnable " + r);
+            System.out.println("executor " + this);
+            System.out.println("handler " + handler);
             handler.rejectedExecution(r, this);
         }
         //Reject thread if max nr reached by calling RejectedExecutionHandler
