@@ -23,7 +23,6 @@ class Worker implements Runnable {
                         InputStreamReader(sock.getInputStream()));
 
         }catch(IOException e){
-            //throw new IOException("resource(s) cannot be initialized");
         }
     }
 
@@ -71,14 +70,16 @@ public class ChatServer {
                 sock = servsock.accept();
                 Worker worker = null;
                 try{
-                   // if(Verify.getBoolean()) { throw new IOException("Simulated exception"); }
                     worker = new Worker(sock, this);
+                    //if(Verify.getBoolean()) { throw new IOException("Simulated exception"); }
+
                     //new Thread(worker).start();
                 }catch(IOException e){
                     //assert(false);
                     init = false;
                 }
                 if(init){
+                    assert(init);
                     //assert(false);
                     new Thread(worker).start();
                 }
