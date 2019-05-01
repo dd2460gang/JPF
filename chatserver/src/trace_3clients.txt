@@ -1,0 +1,548 @@
+JavaPathfinder core system v8.0 (rev c4975b695986b352d3434c73ed638255158b5598) - (C) 2005-2014 United States Government. All rights reserved.
+
+
+====================================================== system under test
+ChatServer.main("3")+ChatClient.main()+ChatClient.main()+ChatClient.main()
+
+====================================================== search started: 5/1/19 2:14 PM
+Thread running: Thread[main,5,main]
+Adding 0 to workers
+Registered worker 0.
+Client 0 connected.
+0: Received [0]0: Hello, world!
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+0: Received [1]0: Hello, world!
+Thread running: Thread[main,5,main]
+Adding 2 to workers
+Registered worker 2.
+Client 0 connected.
+0: Received [2]0: Hello, world!
+Server shutting down.
+0: Received [2]0: Hello, world!
+0: Received [2]0: Hello, world!
+Worker thread 2: java.net.SocketException: Connection reset
+Server shutting down.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 2 to workers
+Registered worker 2.
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+Worker thread 1: java.net.SocketException: Connection reset
+Thread running: Thread[main,5,main]
+Adding 2 to workers
+Registered worker 2.
+Client 0 connected.
+0: Received [2]0: Hello, world!
+Server shutting down.
+0: Received [2]0: Hello, world!
+0: Received [2]0: Hello, world!
+Worker thread 2: java.net.SocketException: Connection reset
+Server shutting down.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 2 to workers
+Registered worker 2.
+Worker thread 1: java.net.SocketException: Connection reset
+0: Received [1]0: Hello, world!
+Client 0 connected.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+0: Received [1]0: Hello, world!
+Thread running: Thread[main,5,main]
+Adding 2 to workers
+Registered worker 2.
+Client 0 connected.
+0: Received [2]0: Hello, world!
+0: Received [2]0: Hello, world!
+0: Received [2]0: Hello, world!
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 2 to workers
+Registered worker 2.
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+Worker thread 1: java.net.SocketException: Connection reset
+Thread running: Thread[main,5,main]
+Adding 2 to workers
+Registered worker 2.
+Client 0 connected.
+0: Received [2]0: Hello, world!
+0: Received [2]0: Hello, world!
+0: Received [2]0: Hello, world!
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 2 to workers
+Registered worker 2.
+Client 0 connected.
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+Worker thread 1: java.net.SocketException: Connection reset
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+0: Received [0]0: Hello, world!
+0: Received [0]0: Hello, world!
+0: Received [0]0: Hello, world!
+0: Received [0]0: Hello, world!
+0: Received [0]0: Hello, world!
+0: Received [0]0: Hello, world!
+0: Received [0]0: Hello, world!
+0: Received [0]0: Hello, world!
+Worker thread 0: java.net.SocketException: Connection reset
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+0: Received [1]0: Hello, world!
+Thread running: Thread[main,5,main]
+Adding 2 to workers
+Registered worker 2.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 2 to workers
+Registered worker 2.
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+Worker thread 1: java.net.SocketException: Connection reset
+Worker thread 1: java.net.SocketException: Connection reset
+0: Received [1]0: Hello, world!
+Client 0 connected.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+0: Received [1]0: Hello, world!
+Thread running: Thread[main,5,main]
+Adding 2 to workers
+Registered worker 2.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 2 to workers
+Registered worker 2.
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+Worker thread 1: java.net.SocketException: Connection reset
+Client 0 connected.
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+Worker thread 1: java.net.SocketException: Connection reset
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Worker thread 0: java.net.SocketException: Connection reset
+Worker thread 0: java.net.SocketException: Connection reset
+Worker thread 0: java.net.SocketException: Connection reset
+0: Received [0]0: Hello, world!
+0: Received [0]0: Hello, world!
+0: Received [0]0: Hello, world!
+Client 0 connected.
+Client 0 connected.
+Client 0 connected.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 0 to workers
+Registered worker 0.
+Thread running: Thread[main,5,main]
+Adding 0 to workers
+Registered worker 0.
+Thread running: Thread[main,5,main]
+Adding 0 to workers
+Registered worker 0.
+Thread running: Thread[main,5,main]
+Adding 0 to workers
+Registered worker 0.
+Thread running: Thread[main,5,main]
+Adding 0 to workers
+Registered worker 0.
+Client 0 connected.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 0 to workers
+Registered worker 0.
+Client 0 connected.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 0 to workers
+Registered worker 0.
+Client 0 connected.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 0 to workers
+Registered worker 0.
+Client 0 connected.
+0: Received [0]0: Hello, world!
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+Client 0 connected.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+Client 0 connected.
+0: Received [0]0: Hello, world!
+0: Received [0]0: Hello, world!
+0: Received [0]0: Hello, world!
+0: Received [0]0: Hello, world!
+Worker thread 0: java.net.SocketException: Connection reset
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+Client 0 connected.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+Client 0 connected.
+Worker thread 0: java.net.SocketException: Connection reset
+0: Received [0]0: Hello, world!
+Client 0 connected.
+Client 0 connected.
+0: Received [0]0: Hello, world!
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+0: Received [1]0: Hello, world!
+Thread running: Thread[main,5,main]
+Adding 2 to workers
+Registered worker 2.
+Client 0 connected.
+0: Received [2]0: Hello, world!
+0: Received [2]0: Hello, world!
+0: Received [2]0: Hello, world!
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 2 to workers
+Registered worker 2.
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+Worker thread 1: java.net.SocketException: Connection reset
+Thread running: Thread[main,5,main]
+Adding 2 to workers
+Registered worker 2.
+Client 0 connected.
+0: Received [2]0: Hello, world!
+0: Received [2]0: Hello, world!
+0: Received [2]0: Hello, world!
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 2 to workers
+Registered worker 2.
+Client 0 connected.
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+Worker thread 1: java.net.SocketException: Connection reset
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+0: Received [0]0: Hello, world!
+0: Received [0]0: Hello, world!
+0: Received [0]0: Hello, world!
+0: Received [0]0: Hello, world!
+Worker thread 0: java.net.SocketException: Connection reset
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+0: Received [1]0: Hello, world!
+Thread running: Thread[main,5,main]
+Adding 2 to workers
+Registered worker 2.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 2 to workers
+Registered worker 2.
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+Worker thread 1: java.net.SocketException: Connection reset
+Client 0 connected.
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+Worker thread 1: java.net.SocketException: Connection reset
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Worker thread 0: java.net.SocketException: Connection reset
+0: Received [0]0: Hello, world!
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 0 to workers
+Registered worker 0.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 0 to workers
+Registered worker 0.
+Thread running: Thread[main,5,main]
+Adding 0 to workers
+Registered worker 0.
+Thread running: Thread[main,5,main]
+Adding 0 to workers
+Registered worker 0.
+Client 0 connected.
+Client 0 connected.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 0 to workers
+Registered worker 0.
+Thread running: Thread[main,5,main]
+Adding 0 to workers
+Registered worker 0.
+Thread running: Thread[main,5,main]
+Adding 0 to workers
+Registered worker 0.
+Client 0 connected.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 0 to workers
+Registered worker 0.
+Client 0 connected.
+0: Received [0]0: Hello, world!
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+0: Received [0]0: Hello, world!
+0: Received [0]0: Hello, world!
+Worker thread 0: java.net.SocketException: Connection reset
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+0: Received [0]0: Hello, world!
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+Client 0 connected.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+0: Received [0]0: Hello, world!
+0: Received [0]0: Hello, world!
+Worker thread 0: java.net.SocketException: Connection reset
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+Client 0 connected.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+Client 0 connected.
+0: Received [0]0: Hello, world!
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+Client 0 connected.
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+0: Received [0]0: Hello, world!
+0: Received [0]0: Hello, world!
+Worker thread 0: java.net.SocketException: Connection reset
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+Client 0 connected.
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+0: Received [1]0: Hello, world!
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 1 to workers
+Registered worker 1.
+Client 0 connected.
+0: Received [0]0: Hello, world!
+0: Received [0]0: Hello, world!
+0: Received [0]0: Hello, world!
+Worker thread 0: java.net.SocketException: Connection reset
+Thread running: Thread[main,5,main]
+Adding 0 to workers
+Registered worker 0.
+Thread running: Thread[main,5,main]
+Adding 0 to workers
+Registered worker 0.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 0 to workers
+Registered worker 0.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 0 to workers
+Registered worker 0.
+Thread running: Thread[main,5,main]
+Adding 0 to workers
+Registered worker 0.
+Client 0 connected.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 0 to workers
+Registered worker 0.
+Client 0 connected.
+Thread running: Thread[main,5,main]
+Adding 0 to workers
+Registered worker 0.
+
+====================================================== results
+no errors detected
+
+====================================================== statistics
+elapsed time:       00:00:03
+states:             new=555,visited=501,backtracked=1056,end=4
+search:             maxDepth=25,constraints=0
+choice generators:  thread=554 (signal=0,lock=1,sharedRef=0,threadApi=0,reschedule=38), data=0
+heap:               new=84597,released=9227,maxLive=2153,gcCycles=1056
+instructions:       1521668
+max memory:         304MB
+loaded code:        classes=126,methods=6643
+
+====================================================== search finished: 5/1/19 2:14 PM
