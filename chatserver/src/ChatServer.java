@@ -76,11 +76,10 @@ public class ChatServer {
         RejectedExecutionHandler rH = new RejectedExecutionHandler(){
             @Override
             public synchronized void rejectedExecution(Runnable r, ThreadPoolExecutor executor){
-                //assert(false);
                 System.out.println("No more threads");
             }
         };
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 1, 10, TimeUnit.SECONDS, wQueue, rH);
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 2, 10, TimeUnit.SECONDS, wQueue, rH);
 
         try {
             servsock = new ServerSocket(port);

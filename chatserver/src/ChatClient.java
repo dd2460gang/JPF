@@ -18,7 +18,11 @@ public class ChatClient {
 
     public ChatClient() {
         synchronized(getClass()) {
-            id = currID++;
+            System.out.println("id before" + id);
+            int newID = (currID+1);
+            System.out.println("currID " + newID);
+            id = newID;
+            System.out.println("id after" + id);
         }
     }
 
@@ -36,7 +40,14 @@ public class ChatClient {
             out.write(id + ": Hello, world!\n");
             out.flush();
             for (int i = 0; i < 1; i++) {
-                System.out.println(id + ": Received " + in.readLine());
+                String recieved = in.readLine();
+                System.out.println(id + ": Received " + recieved);
+                String[] recParts = recieved.split(":");
+                if(recieved.matches("\\[[01]\\]0: Hello, world!")){
+                    System.out.println("true");
+                }
+                assert(recieved.matches("\\[\\d\\]0: Hello, world!")||recParts[1].trim().equals("Server busy"));
+
             }
             out.close();
         } catch(IOException e) {
