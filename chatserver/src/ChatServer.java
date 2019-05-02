@@ -74,7 +74,7 @@ public class ChatServer {
                 Worker worker = null;
                 try{
                     worker = new Worker(sock, this);
-                    //if(Verify.getBoolean()) { throw new IOException("Simulated exception"); }
+                    if(Verify.getBoolean()) { throw new IOException("Simulated exception"); }
 
                     //new Thread(worker).start();
                 }catch(IOException e){
