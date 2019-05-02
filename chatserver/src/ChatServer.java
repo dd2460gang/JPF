@@ -32,6 +32,10 @@ class Worker implements Runnable {
 	try {
             //out
             assert(out != null);
+            //3.5
+            assert(in !=null);
+            assert(sock !=null);
+
     	    assert(chatServer.getWorker(idx) == null);
             System.err.println("Adding "+idx+" to workers");
             chatServer.putWorker(idx, this);
@@ -69,12 +73,16 @@ public class ChatServer {
 	    ServerSocket servsock = null;
         try {
             servsock = new ServerSocket(port);
+            //3.5
+            assert servsock !=null;
             while (maxServ-- != 0) {
                 sock = servsock.accept();
                 Worker worker = null;
                 try{
                     worker = new Worker(sock, this);
-                    if(Verify.getBoolean()) { throw new IOException("Simulated exception"); }
+                    //3.5
+                    assert worker != null;
+                    //if(Verify.getBoolean()) { throw new IOException("Simulated exception"); }
 
                     //new Thread(worker).start();
                 }catch(IOException e){
@@ -110,13 +118,21 @@ public class ChatServer {
 
     public synchronized void remove(int i) {
 	    //workers[i] = null;
+        int sizebefore = workers.size();
         workers.remove(i);
         sendAll("Client " + i + " quit.");
+        //3.5
+        assert workers.size() == sizebefore-1 : "sizebefore was "+sizebefore +" sizenow is "+workers.size();
     }
     public synchronized void putWorker(int idx, Worker w){
+        int sizebefore = workers.size();
         workers.put(idx, w);
+        //3.5
+        assert workers.size() == sizebefore+1 : "sizebefore was "+sizebefore +" sizenow is "+workers.size();
     }
-    public  synchronized Worker getWorker(int id){
+    public synchronized Worker getWorker(int id){
+        //3.5 - konstig, makes error assert on line 125.
+        //assert workers.get(id)!=null;
         return workers.get(id);
     }
 
