@@ -46,6 +46,7 @@ class Worker implements Runnable {
             //in
             String s = null;
             while ((s = in.readLine()) != null) {
+                //assert(s.matches())
                 chatServer.sendAll("[" + idx + "]" + s);
             }
             sock.close();
@@ -125,6 +126,7 @@ public class ChatServer {
 
     public synchronized void remove(int i) {
 	    //workers[i] = null;
+        //assert(false);
         workers.remove(i);
         sendAll("Client " + i + " quit.");
     }

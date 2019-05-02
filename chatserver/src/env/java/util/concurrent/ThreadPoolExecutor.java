@@ -27,7 +27,7 @@ public class ThreadPoolExecutor {
 
     public void execute(Runnable r) {
         if(launchedThreads<maximumPoolSize){
-            r.run();
+            new Thread(r).start();
             launchedThreads++;
         } else handler.rejectedExecution(r, this);
     }

@@ -42,11 +42,9 @@ public class ChatClient {
             for (int i = 0; i < 1; i++) {
                 String recieved = in.readLine();
                 System.out.println(id + ": Received " + recieved);
-                String[] recParts = recieved.split(":");
-                if(recieved.matches("\\[[01]\\]0: Hello, world!")){
-                    System.out.println("true");
-                }
-                assert(recieved.matches("\\[\\d\\]0: Hello, world!")||recParts[1].trim().equals("Server busy"));
+
+                assert recieved.contains("Hello,") || recieved.contains("world") || recieved.contains("Client")||recieved.contains("quit") : "recieved was: " + recieved;
+                //3.5 Fault before connection established
 
             }
             out.close();
