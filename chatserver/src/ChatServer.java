@@ -39,6 +39,9 @@ class Worker implements Runnable {
             //in
             String s = null;
             while ((s = in.readLine()) != null) {
+                //3.5 added property - checks if message from clients is as expected.
+                assert s.contains("Hello,")||s.contains("world") : "message was " + s;
+
                 chatServer.sendAll("[" + idx + "]" + s);
             }
             sock.close();
