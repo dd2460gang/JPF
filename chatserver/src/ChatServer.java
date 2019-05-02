@@ -72,10 +72,10 @@ public class ChatServer {
                 try{
                     worker = new Worker(sock, this);
                     //if(Verify.getBoolean()) { throw new IOException("Simulated exception"); }
-
+                    //assert(false);
                     //new Thread(worker).start();
                 }catch(IOException e){
-                    //assert(false);
+                    assert(false);
                     init = false;
                 }
                 if(init){

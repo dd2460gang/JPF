@@ -16,3 +16,5 @@ cg.threads.break_arrays=true
 
 report.console.property_violation=result,error,trace,snapshot
 vm.reuse_tid=false
+
+cg.boolean.false_first = false
