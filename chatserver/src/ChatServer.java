@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 import env.java.util.concurrent.RejectedExecutionHandler;
 import env.java.util.concurrent.ThreadPoolExecutor;
-//import gov.nasa.jpf.vm.Verify;
+import gov.nasa.jpf.vm.Verify;
 
 
 class Worker implements Runnable {
@@ -89,7 +89,7 @@ public class ChatServer {
                 Worker worker = null;
                 try{
                     worker = new Worker(sock, this);
-                    //if(Verify.getBoolean()) { throw new IOException("Simulated exception"); }
+                    if(Verify.getBoolean()) { throw new IOException("Simulated exception"); }
 
                     //new Thread(worker).start();
                 }catch(IOException e){
