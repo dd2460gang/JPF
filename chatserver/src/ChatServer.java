@@ -88,7 +88,6 @@ public class ChatServer {
                 Worker worker = null;
                 try{
                     worker = new Worker(sock, this);
-                    if(Verify.getBoolean()) { throw new IOException("Simulated exception"); }
                 }catch(IOException e){
                     init = false;
                 }
@@ -120,8 +119,6 @@ public class ChatServer {
     }
 
     public synchronized void remove(int i) {
-	    //workers[i] = null;
-        //assert(false);
         workers.remove(i);
         sendAll("Client " + i + " quit.");
     }
