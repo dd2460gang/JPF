@@ -72,13 +72,12 @@ public class ChatServer {
         boolean init = true;
         Socket sock;
 	    ServerSocket servsock = null;
-        //ThreadPoolExecutor executor = (env.java.util.concurrent.ThreadPoolExecutor) Executors.newFixedThreadPool(10);
         BlockingQueue<Runnable> wQueue = new LinkedBlockingQueue();
         RejectedExecutionHandler rH = new RejectedExecutionHandler(){
-            @Override
-            public synchronized void rejectedExecution(Runnable r, ThreadPoolExecutor executor){
-                System.out.println("No more threads");
-            }
+        @Override
+        public synchronized void rejectedExecution(Runnable r, ThreadPoolExecutor executor){
+            System.out.println("No more threads");
+        }
         };
         ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 2, 10, TimeUnit.SECONDS, wQueue, rH);
 
@@ -90,15 +89,11 @@ public class ChatServer {
                 try{
                     worker = new Worker(sock, this);
                     if(Verify.getBoolean()) { throw new IOException("Simulated exception"); }
-
-                    //new Thread(worker).start();
                 }catch(IOException e){
-                    //assert(false);
                     init = false;
                 }
                 if(init){
                     assert(init);
-                    //assert(false);
                     executor.execute(new Thread(worker));
                 }
             }

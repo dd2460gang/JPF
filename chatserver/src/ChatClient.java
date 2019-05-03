@@ -44,8 +44,6 @@ public class ChatClient {
                 System.out.println(id + ": Received " + recieved);
 
                 assert recieved.contains("Hello,") || recieved.contains("world") || recieved.contains("Client")||recieved.contains("quit") : "recieved was: " + recieved;
-                //3.5 Fault before connection established
-
             }
             out.close();
         } catch(IOException e) {
