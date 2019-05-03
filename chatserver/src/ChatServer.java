@@ -32,7 +32,7 @@ class Worker implements Runnable {
 	try {
             //out
             assert(out != null);
-            //3.5
+            //3.5 added properties
             assert(in !=null);
             assert(sock !=null);
 
@@ -73,25 +73,21 @@ public class ChatServer {
 	    ServerSocket servsock = null;
         try {
             servsock = new ServerSocket(port);
-            //3.5
+            //3.5 added property
             assert servsock !=null;
             while (maxServ-- != 0) {
                 sock = servsock.accept();
                 Worker worker = null;
                 try{
                     worker = new Worker(sock, this);
-                    //3.5
+                    //3.5 added property
                     assert worker != null;
-                    //if(Verify.getBoolean()) { throw new IOException("Simulated exception"); }
 
-                    //new Thread(worker).start();
                 }catch(IOException e){
-                    //assert(false);
                     init = false;
                 }
                 if(init){
                     assert(init);
-                    //assert(false);
                     new Thread(worker).start();
                 }
             }
@@ -121,18 +117,16 @@ public class ChatServer {
         int sizebefore = workers.size();
         workers.remove(i);
         sendAll("Client " + i + " quit.");
-        //3.5
+        //3.5 added property
         assert workers.size() == sizebefore-1 : "sizebefore was "+sizebefore +" sizenow is "+workers.size();
     }
     public synchronized void putWorker(int idx, Worker w){
         int sizebefore = workers.size();
         workers.put(idx, w);
-        //3.5
+        //3.5 added property
         assert workers.size() == sizebefore+1 : "sizebefore was "+sizebefore +" sizenow is "+workers.size();
     }
     public synchronized Worker getWorker(int id){
-        //3.5 - konstig, makes error assert on line 125.
-        //assert workers.get(id)!=null;
         return workers.get(id);
     }
 
