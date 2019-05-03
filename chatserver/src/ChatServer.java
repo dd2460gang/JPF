@@ -17,13 +17,11 @@ class Worker implements Runnable {
     public Worker(Socket s, ChatServer cs) throws IOException{
         chatServer = cs;
         sock = s;
-        try{
-                out = new PrintWriter(sock.getOutputStream(), true);
-                in = new BufferedReader(new
-                        InputStreamReader(sock.getInputStream()));
 
-        }catch(IOException e){
-        }
+        if(Verify.getBoolean()) { throw new IOException("Simulated exception"); }
+        out = new PrintWriter(sock.getOutputStream(), true);
+        in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+
     }
 
     public void run() {
@@ -71,16 +69,14 @@ public class ChatServer {
                 Worker worker = null;
                 try{
                     worker = new Worker(sock, this);
-                    //if(Verify.getBoolean()) { throw new IOException("Simulated exception"); }
-                    //assert(false);
-                    //new Thread(worker).start();
+
                 }catch(IOException e){
                     assert(false);
                     init = false;
                 }
                 if(init){
                     assert(init);
-                    //assert(false);
+                    assert(false);
                     new Thread(worker).start();
                 }
             }
